@@ -28,7 +28,7 @@ function Home() {
     const [isEditMode, setIsEditMode] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
 
-    const baseURI = "http://localhost:5001";
+    const baseURI = "https://e-commerce-mongodb-saad.cyclic.app";
 
     const getAllProducts = async () => {
         try {

@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 const mongodbURI =
   process.env.mongodbURI ||
-  "mongodb+srv://saad:sdsdsd@cluster0.9bemtsg.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://saad:sdsdsd@cluster0.9bemtsg.mongodb.net/ecommerce?retryWrites=true&w=majority";
 
 // mongoose.connect(mongodbURI)
 
@@ -61,66 +61,114 @@ app.post("/product", (req, res) => {
   );
 });
 
-//   products.push(
-//     productId
-//   );
-//   res.send({ message: "product added successfully" });
-// });
 
-app.get("/products", (req, res) => {
-  res.send({
-    message: "got all products successfully",
-    data: products,
+app.get('/products', (req, res) => {
+
+  productModel.find({}, (err, data) => {
+      if (!err) {
+          res.send({
+              message: "got all products successfully",
+              data: data
+          })
+      } else {
+          res.status(500).send({
+              message: "server error"
+          })
+      }
   });
-});
-console.log(products[0]);
+})
 
-app.get("/products/:id", (req, res) => {
+
+app.get('/product/:id', (req, res) => {
+
   const id = req.params.id;
 
-  const foundProduct = products.find((body) => body.id == id);
-  res.send(foundProduct);
-});
+  productModel.findOne({ _id: id }, (err, data) => {
+      if (!err) {
+          if (data) {
+              res.send({
+                  message: `get product by id: ${data._id} success`,
+                  data: data
+              });
+          } else {
+              res.status(404).send({
+                  message: "product not found",
+              })
+          }
+      } else {
+          res.status(500).send({
+              message: "server error"
+          })
+      }
+  });
+})
 
-app.delete("/products/:id", (req, res) => {
+app.delete('/product/:id', (req, res) => {
   const id = req.params.id;
 
-  products = products.filter((body) => body.id != id);
+  productModel.deleteOne({ _id: id }, (err, deletedData) => {
+      console.log("deleted: ", deletedData);
+      if (!err) {
 
-  res.send(`user with id ${id}`);
-});
+          if (deletedData.deletedCount !== 0) {
+              res.send({
+                  message: "Product has been deleted successfully",
+              })
+          } else {
+              res.status(404);
+              res.send({
+                  message: "No Product found with this id: " + id,
+              });
+          }
+      } else {
+          res.status(500).send({
+              message: "server error"
+          })
+      }
+  });
+})
 
-app.put("/products/:id", (req, res) => {
+app.put('/product/:id', async (req, res) => {
+
   const body = req.body;
   const id = req.params.id;
 
-  if (!body.name || !body.price || !body.description) {
-    res.status(400).send({ message: "required parameters missing" });
-    return;
+  if (
+      !body.name ||
+      !body.price ||
+      !body.description
+  ) {
+      res.status(400).send(` required parameter missing. example request body:
+      {
+          "name": "value",
+          "price": "value",
+          "description": "value"
+      }`)
+      return;
   }
 
-  console.log(body.name);
-  console.log(body.price);
-  console.log(body.description);
+  try {
+      let data = await productModel.findByIdAndUpdate(id,
+          {
+              name: body.name,
+              price: body.price,
+              description: body.description
+          },
+          { new: true }
+      ).exec();
 
-  let isFound = false;
-  for (let i = 0; i < products.length; i++) {
-    if (products[i].id === id) {
-      products[i].name = body.name;
-      products[i].price = body.price;
-      products[i].description = body.description;
-      res.send({ message: "product modified successfully" });
-      isFound = true;
-      break;
-    }
-  }
-  if (!isFound) {
-    res.status(404);
-    res.send({ message: "edit fail: product not found" });
-  }
-  res.send({ message: "product added successfully" });
-});
+      console.log('updated: ', data);
 
+      res.send({
+          message: "product modified successfully"
+      });
+
+  } catch (error) {
+      res.status(500).send({
+          message: "server error"
+      })
+  }
+})
 
 const __dirname = path.resolve();
 app.use("/", express.static(path.join(__dirname, "./web/build")));

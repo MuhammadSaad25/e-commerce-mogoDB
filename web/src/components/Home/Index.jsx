@@ -28,24 +28,23 @@ function Home() {
     const [isEditMode, setIsEditMode] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
 
-    const baseURI = "https://e-commerce-sever-saad.cyclic.app";
-
+    const baseURI = "http://localhost:5001";
 
     const getAllProducts = async () => {
         try {
             const response = await axios.get(`${baseURI}/products`)
             console.log("response: ", response.data);
 
-            setProducts(response.data.data)
+            setProducts(response.data.data.reverse())
 
         } catch (error) {
             console.log("error in getting all products", error);
         }
     }
 
-    const deleteProduct = async (id) => {
+    const deleteProduct = async (_id) => {
         try {
-            const response = await axios.delete(`${baseURI}/products/${id}`)
+            const response = await axios.delete(`${baseURI}/product/${_id}`)
             console.log("response: ", response.data);
 
             setLoadProduct(!loadProduct)
@@ -155,7 +154,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.put(`${baseURI}/products/${editingProduct.id}`, {
+            axios.put(`${baseURI}/product/${editingProduct._id}`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,
@@ -267,7 +266,7 @@ function Home() {
 
             <div className='main'>
                 {products.map((eachProduct, i) => (
-                    <div className='product-container' key={eachProduct.id} >
+                    <div className='product-container' key={eachProduct._id} >
                         <div className='product-details'>
                             <p className="producttitle">{eachProduct.name}</p>
                             <div className='price-container'>
@@ -275,7 +274,7 @@ function Home() {
                                 <span>{eachProduct.description}</span>
                                 {/* <span>{eachProduct.id}</span> */}
                                 <div className="pBtn">
-                                    <button className="unit" onClick={() => deleteProduct(eachProduct.id)}>Delete</button>
+                                    <button className="unit" onClick={() => deleteProduct(eachProduct._id)}>Delete</button>
                                     <button className="unit" onClick={() => editMode(eachProduct)}>Edit</button>
                                     {/* <button className="unit" onClick={() => editMode(eachProduct.id)}>Update</button> */}
                                     {/* <button onClick={() => {
@@ -285,7 +284,7 @@ function Home() {
                             </div>
                         </div>
 
-                        {(isEditMode && editingProduct.id === eachProduct.id) ?
+                        {(isEditMode && editingProduct._id === eachProduct._id) ?
                             <div>
                                 <Modal
                                     open={openEdit}

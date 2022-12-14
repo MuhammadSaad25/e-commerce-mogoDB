@@ -21,7 +21,7 @@ function Home() {
     const handleOpenClose = () => setOpen(!open);
 
     const [openEdit, setOpenEdit] = useState(false);
-    const handleEditOpenClose = () => setOpenEdit(!openEdit);
+    // const handleEditOpenClose = () => setOpenEdit(!openEdit);
 
     const [products, setProducts] = useState([])
     const [loadProduct, setLoadProduct] = useState(false)
@@ -55,9 +55,10 @@ function Home() {
     }
 
     const editMode = (product) => {
-        setIsEditMode(!isEditMode)
+        setIsEditMode(true)
         setEditingProduct(product)
-        handleEditOpenClose(openEdit)
+        // handleEditOpenClose(openEdit)
+        setOpenEdit(true)
 
         editFormik.setFieldValue("productName", product.name)
         editFormik.setFieldValue("productPrice", product.price)
@@ -162,7 +163,9 @@ function Home() {
                 .then(response => {
                     console.log("response: ", response.data);
                     setLoadProduct(!loadProduct)
-                    setOpenEdit(!openEdit)
+                    setOpenEdit(false)
+                    setIsEditMode(false)
+       
                 })
 
                 .catch(err => {
@@ -288,7 +291,7 @@ function Home() {
                             <div>
                                 <Modal
                                     open={openEdit}
-                                    onClose={handleEditOpenClose}
+                                    onClose={!openEdit}
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description">
                                     <Box sx={style} className='box'>

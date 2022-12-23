@@ -1,0 +1,208 @@
+body,
+html {
+  background-color: #ebecf0;
+  height: 100vh;
+  width: 100vw;
+}
+body,
+p,
+input,
+select,
+textarea,
+button {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.2px;
+  font-size: 16px;
+}
+div,
+p {
+  color: #babecc;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+form {
+  /* border: 2px solid black; */
+  padding: 16px;
+  width: 60%;
+  height: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.segment {
+  padding: 12px 0;
+  text-align: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.content {
+  /* border: #ae1100 1px solid; */
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button,
+input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: #ebecf0;
+  text-shadow: 1px 1px 0 #fff;
+}
+label {
+  display: block;
+  margin-bottom: 24px;
+  width: 80%;
+}
+input {
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+button {
+  color: #61677c;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.errorSpan {
+  color: #ae1100;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+}
+button:active {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+button .icon {
+  margin-right: 8px;
+}
+button.unit {
+  border-radius: 8px;
+  line-height: 0;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  font-size: 19.2px;
+}
+button.unit .icon {
+  margin-right: 0;
+}
+
+.mainBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+button.red {
+  display: block;
+  width: 50%;
+  color: #ae1100;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.input-group label {
+  margin: 0;
+  flex: 1;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Teblet >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+@media screen and (max-width: 820px) {
+  form {
+    /* border: 2px solid black; */
+    padding: 16px;
+    width: 90%;
+    height: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>> mobile >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>. */
+
+@media screen and (max-width: 450px) {
+  form {
+    padding: 16px;
+    width: 320px;
+    height: 70%;
+    display: block;
+  }
+
+  .segment {
+    padding: 12px 0;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .content {
+    width: 100%;
+    display: block;
+  }
+
+  .left {
+    display: block;
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    display: block;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+}

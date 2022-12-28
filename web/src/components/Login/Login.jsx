@@ -55,6 +55,10 @@ const Login = () => {
                     },
                     // { withCredentials: true }//we are not sending cookies
                 );
+                dispatch({
+                    type:'USER_LOGIN',
+                    payload:null
+                })
                 console.log("Login successful", res);
                 //   toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
             } catch (err) {

@@ -38,7 +38,7 @@ function Home() {
 
     const getAllProducts = async () => {
         try {
-            const response = await axios.get(`${baseURI}/products`)
+            const response = await axios.get(`${baseURI}/api/v1/products`)
             console.log("response: ", response.data);
 
             setProducts(response.data.data.reverse())

@@ -43,7 +43,7 @@ const Login = () => {
             console.log(values);
             try {
                 const res = await axios.post(
-                    `${baseURI}/login`,
+                    `${baseURI}/api/v1//login`,
                     {
                         email: values.email,
                         password: values.password,

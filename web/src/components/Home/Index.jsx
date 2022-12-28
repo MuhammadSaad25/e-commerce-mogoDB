@@ -14,7 +14,7 @@ const style = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 370,
-  };
+};
 
 function Home() {
     const [open, setOpen] = useState(false);
@@ -28,7 +28,13 @@ function Home() {
     const [isEditMode, setIsEditMode] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
 
-    const baseURI = "https://e-commerce-mongodb-saad.cyclic.app";
+    let baseURI = "";
+    if (window.location.href.split(":")[0] === "http") {
+        baseURI = `http://localhost:5001`;
+    } else {
+        baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
+    }
+
 
     const getAllProducts = async () => {
         try {
@@ -165,7 +171,7 @@ function Home() {
                     setLoadProduct(!loadProduct)
                     setOpenEdit(false)
                     setIsEditMode(false)
-       
+
                 })
 
                 .catch(err => {
@@ -185,87 +191,87 @@ function Home() {
                 </button>
             </div>
             <div className='modal'>
-            <Modal
-                open={open}
-                onClose={handleOpenClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style} className="box">
+                <Modal
+                    open={open}
+                    onClose={handleOpenClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style} className="box">
 
-                    <form onSubmit={handleSubmit} className="modalForm1">
-                        <button className="unitX" variant="contained" onClick={handleOpenClose}>
-                            X
-                        </button>
-                        <label htmlFor="productName" className="placeholder">
-                            Product Name
-                            <input
-                                className="input"
-                                type="text"
-                                autoComplete="on"
-                                id="productName"
-                                placeholder="Your Product Name..."
-                                name="productName"
-                                value={values.productName}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                            {touched.productName && Boolean(errors.productName) ? (
-                                <span className="errorSpan">{errors.productName}</span>
-                            ) : null}
-                        </label>
+                        <form onSubmit={handleSubmit} className="modalForm1">
+                            <button className="unitX" variant="contained" onClick={handleOpenClose}>
+                                X
+                            </button>
+                            <label htmlFor="productName" className="placeholder">
+                                Product Name
+                                <input
+                                    className="input"
+                                    type="text"
+                                    autoComplete="on"
+                                    id="productName"
+                                    placeholder="Your Product Name..."
+                                    name="productName"
+                                    value={values.productName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                {touched.productName && Boolean(errors.productName) ? (
+                                    <span className="errorSpan">{errors.productName}</span>
+                                ) : null}
+                            </label>
 
-                        <label htmlFor="productPrice" className="placeholder">
-                            Product Price
-                            <input
-                                className="input"
-                                type="text"
-                                autoComplete="on"
-                                id="productPrice"
-                                placeholder="Your Product Price..."
-                                name="productPrice"
-                                // value={values.productPrice}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
+                            <label htmlFor="productPrice" className="placeholder">
+                                Product Price
+                                <input
+                                    className="input"
+                                    type="text"
+                                    autoComplete="on"
+                                    id="productPrice"
+                                    placeholder="Your Product Price..."
+                                    name="productPrice"
+                                    // value={values.productPrice}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
 
-                            {touched.productPrice && Boolean(errors.productPrice) ? (
-                                <span className="errorSpan">{errors.productPrice}</span>
-                            ) : null}
-                        </label>
+                                {touched.productPrice && Boolean(errors.productPrice) ? (
+                                    <span className="errorSpan">{errors.productPrice}</span>
+                                ) : null}
+                            </label>
 
-                        <label htmlFor="productDescription" className="placeholder">
-                            Product Description
-                            <input
-                                className="input"
-                                type="text"
-                                autoComplete="on"
-                                id="productDescription"
-                                placeholder="Your Product Description..."
-                                name="productDescription"
-                                value={values.productDescription}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
+                            <label htmlFor="productDescription" className="placeholder">
+                                Product Description
+                                <input
+                                    className="input"
+                                    type="text"
+                                    autoComplete="on"
+                                    id="productDescription"
+                                    placeholder="Your Product Description..."
+                                    name="productDescription"
+                                    value={values.productDescription}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
 
-                            {touched.productDescription &&
-                                Boolean(errors.productDescription) ? (
-                                <span className="errorSpan">{errors.productDescription}</span>
-                            ) : null}
-                        </label>
+                                {touched.productDescription &&
+                                    Boolean(errors.productDescription) ? (
+                                    <span className="errorSpan">{errors.productDescription}</span>
+                                ) : null}
+                            </label>
 
 
 
-                        <div id="previewProductImg" alt=""></div>
-                        <button type="submit" className="unit">
-                            SUBMIT
-                        </button>
+                            <div id="previewProductImg" alt=""></div>
+                            <button type="submit" className="unit">
+                                SUBMIT
+                            </button>
 
-                    </form>
-                </Box>
-            </Modal>
+                        </form>
+                    </Box>
+                </Modal>
             </div>
-           
+
 
             <div className='main'>
                 {products.map((eachProduct, i) => (

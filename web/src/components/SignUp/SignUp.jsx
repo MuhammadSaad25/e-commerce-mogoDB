@@ -84,9 +84,9 @@ function Signup() {
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
                     <h1>Sign up</h1>
-                    <button className="unit" type="button">
+                    {/* <button className="unit" type="button">
                         <i className="icon ion-md-bookmark"></i>
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="content">

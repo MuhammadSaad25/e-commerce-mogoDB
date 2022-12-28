@@ -50,7 +50,7 @@ const Login = () => {
                     },
                     // { withCredentials: true }//we are not sending cookies
                 );
-                console.log("Signup successful", res);
+                console.log("Login successful", res);
                 //   toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
             } catch (err) {
                 console.log(err);
@@ -70,50 +70,46 @@ const Login = () => {
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
                     <h1>Login</h1>
-                    <button className="unit" type="button">
+                    {/* <button className="unit" type="button">
                         <i className="icon ion-md-bookmark"></i>
-                    </button>
+                    </button> */}
                 </div>
 
-                <div className="content">
-                    <div className="left">
+                <div className="content1">
 
-                    </div>
+                    <label className=".label">
+                        <input
+                            className="input"
+                            id="email"
+                            type="email"
+                            placeholder="Email Address"
+                            name="email"
+                            value={fmrk.values.email}
+                            onChange={fmrk.handleChange}
+                            onBlur={fmrk.handleBlur}
+                        />
+                    </label>
+                    {fmrk.touched.email && Boolean(fmrk.errors.email) ? (
+                        <p className="errorSpan">{fmrk.errors.email}</p>
+                    ) : null}
 
-                    <div className="right">
-                        <label>
-                            <input
-                                className="input"
-                                id="email"
-                                type="email"
-                                placeholder="Email Address"
-                                name="email"
-                                value={fmrk.values.email}
-                                onChange={fmrk.handleChange}
-                                onBlur={fmrk.handleBlur}
-                            />
-                        </label>
-                        {fmrk.touched.email && Boolean(fmrk.errors.email) ? (
-                            <p className="errorSpan">{fmrk.errors.email}</p>
-                        ) : null}
+                    <label className=".label">
+                        <input
+                            id="userPassword"
+                            className="input"
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={fmrk.values.password}
+                            onChange={fmrk.handleChange}
+                            onBlur={fmrk.handleBlur}
+                        />
+                    </label>
+                    {fmrk.touched.password && Boolean(fmrk.errors.password) ? (
+                        <p className="errorSpan">{fmrk.errors.password}</p>
+                    ) : null}
+                    <br />
 
-                        <label>
-                            <input
-                                id="userPassword"
-                                className="input"
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                value={fmrk.values.password}
-                                onChange={fmrk.handleChange}
-                                onBlur={fmrk.handleBlur}
-                            />
-                        </label>
-                        {fmrk.touched.password && Boolean(fmrk.errors.password) ? (
-                            <p className="errorSpan">{fmrk.errors.password}</p>
-                        ) : null}
-                        <br />
-                    </div>
                 </div>
 
                 <div className="mainBtn">

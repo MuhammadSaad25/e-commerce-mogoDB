@@ -25,7 +25,7 @@ export default function App(props) {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/login" element={<Login/>} />
+          <Route path="/" element={<Login/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="*" element={<Navigate to="/login" replace={true} />} />
         </Routes>

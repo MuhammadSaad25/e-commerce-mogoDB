@@ -27,7 +27,7 @@ export default function App(props) {
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/signup" element={<SignUp/>} />
-          <Route path="*" element={<Navigate to="/login" replace={true} />} />
+          <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
       )}
     </div>

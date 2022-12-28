@@ -26,7 +26,7 @@ export default function App(props) {
     }
 
     const getProfile = async () => {
-      let response = await axios.post(`${baseURI}/api/v1/products `, {
+      let response = await axios.post(`${baseURI}/api/v1/products`, {
         withCredentials: true,
       });
       dispatch({

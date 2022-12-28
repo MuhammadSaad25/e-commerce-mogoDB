@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
 });
 const userModel = mongoose.model("Users", userSchema);
 
-app.post("/api/v1//signup", (req, res) => {
+app.post("/api/v1/signup", (req, res) => {
   let body = req.body;
 
   if (!body.firstName || !body.lastName || !body.email || !body.password) {
@@ -105,7 +105,7 @@ app.post("/api/v1//signup", (req, res) => {
   });
 });
 
-app.post("/api/v1//login", (req, res) => {
+app.post("/api/v1/login", (req, res) => {
   let body = req.body;
   body.email = body.email.toLowerCase();
 
@@ -184,7 +184,7 @@ app.post("/api/v1//login", (req, res) => {
   );
 });
 
-app.post("/api/v1//logout", (req, res) => {
+app.post("/api/v1/logout", (req, res) => {
   res.cookie("Token", "", {
     maxAge: 1,
     httpOnly: true,
@@ -230,7 +230,7 @@ app.use((req, res, next) => {
   });
 });
 
-app.post("/api/v1//product", (req, res) => {
+app.post("/api/v1/product", (req, res) => {
   const body = req.body;
 
   if (!body.name || !body.price || !body.description) {
@@ -263,7 +263,7 @@ app.post("/api/v1//product", (req, res) => {
   );
 });
 
-app.get("/api/v1//products", (req, res) => {
+app.get("/api/v1/products", (req, res) => {
   productModel.find({}, (err, data) => {
     if (!err) {
       res.send({
@@ -278,7 +278,7 @@ app.get("/api/v1//products", (req, res) => {
   });
 });
 
-app.get("/api/v1//product/:id", (req, res) => {
+app.get("/api/v1/product/:id", (req, res) => {
   const id = req.params.id;
 
   productModel.findOne({ _id: id }, (err, data) => {
@@ -301,7 +301,7 @@ app.get("/api/v1//product/:id", (req, res) => {
   });
 });
 
-app.delete("/api/v1//product/:id", (req, res) => {
+app.delete("/api/v1/product/:id", (req, res) => {
   const id = req.params.id;
 
   productModel.deleteOne({ _id: id }, (err, deletedData) => {
@@ -325,7 +325,7 @@ app.delete("/api/v1//product/:id", (req, res) => {
   });
 });
 
-app.put("/api/v1//product/:id", async (req, res) => {
+app.put("/api/v1/product/:id", async (req, res) => {
   const body = req.body;
   const id = req.params.id;
 

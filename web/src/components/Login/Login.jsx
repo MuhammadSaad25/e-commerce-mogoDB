@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "./Login.css";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalContext } from '../../context/Context';
 import axios from "axios";
+
 
 
 
@@ -18,6 +20,9 @@ if (window.location.href.split(":")[0] === "http") {
 
 
 const Login = () => {
+
+    let { state, dispatch } = useContext(GlobalContext);
+
 
     const fmrk = useFormik({
         initialValues: {
@@ -67,6 +72,7 @@ const Login = () => {
 
     return (
         <div>
+            {/* {state.text} */}
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
                     <h1>Login</h1>

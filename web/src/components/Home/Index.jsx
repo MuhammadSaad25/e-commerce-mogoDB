@@ -50,7 +50,7 @@ function Home() {
 
     const deleteProduct = async (_id) => {
         try {
-            const response = await axios.delete(`${baseURI}/product/${_id}`)
+            const response = await axios.delete(`${baseURI}/api/v1/product/${_id}`)
             console.log("response: ", response.data);
 
             setLoadProduct(!loadProduct)
@@ -117,7 +117,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.post(`${baseURI}/product`, {
+            axios.post(`${baseURI}/api/v1/product`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,

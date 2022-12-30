@@ -6,7 +6,9 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import * as yup from 'yup';
 import axios from "axios";
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useState, useContext, useEffect } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const style = {
     position: "absolute",
@@ -28,17 +30,35 @@ function Home() {
     const [isEditMode, setIsEditMode] = useState(false)
     const [editingProduct, setEditingProduct] = useState(null)
 
-    let baseURI = "";
-    if (window.location.href.split(":")[0] === "http") {
-        baseURI = `http://localhost:5001`;
-    } else {
-        baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
-    }
+    // let baseURI = "";
+    // if (window.location.href.split(":")[0] === "http") {
+    //     baseURI = `http://localhost:5001`;
+    // } else {
+    //     baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
+    // }
+
+    let { state, dispatch } = useContext(GlobalContext);
+
+
+    const logoutHandler = async () => {
+        try {
+          let response = await axios.post(`/api/v1/logout`, {
+            withCredentials: true,
+          });
+          console.log("response: ", response);
+    
+          dispatch({
+            type: "USER_LOGOUT",
+          });
+        } catch (error) {
+          console.log("axios error: ", error);
+        }
+      };
 
 
     const getAllProducts = async () => {
         try {
-            const response = await axios.get(`${baseURI}/api/v1/products`)
+            const response = await axios.get(`/api/v1/products`)
             console.log("response: ", response.data);
 
             setProducts(response.data.data.reverse())
@@ -50,7 +70,7 @@ function Home() {
 
     const deleteProduct = async (_id) => {
         try {
-            const response = await axios.delete(`${baseURI}/api/v1/product/${_id}`)
+            const response = await axios.delete(`/api/v1/product/${_id}`)
             console.log("response: ", response.data);
 
             setLoadProduct(!loadProduct)
@@ -117,7 +137,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.post(`${baseURI}/api/v1/product`, {
+            axios.post(`/api/v1/product`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,
@@ -161,7 +181,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.put(`${baseURI}/product/${editingProduct._id}`, {
+            axios.put(`/api/v1/product/${editingProduct._id}`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,
@@ -189,6 +209,7 @@ function Home() {
                 <button className="unit" variant="contained" onClick={handleOpenClose}>
                     Add Product
                 </button>
+                <button onClick={logoutHandler}>Logout</button>
             </div>
             <div className='modal'>
                 <Modal

@@ -15,20 +15,7 @@ export default function App(props) {
 
   // const [fullName, setFullName] = useState("");
 
-  const logoutHandler = async () => {
-    try {
-      let response = await axios.post(`${state.baseUrl}/logout`, {
-        withCredentials: true,
-      });
-      console.log("response: ", response);
-
-      dispatch({
-        type: "USER_LOGOUT",
-      });
-    } catch (error) {
-      console.log("axios error: ", error);
-    }
-  };
+ 
 
   useEffect(() => {
     const getProfile = async () => {

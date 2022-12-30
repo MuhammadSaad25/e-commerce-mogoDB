@@ -131,7 +131,7 @@ const Login = () => {
                     </button>
                 </div>
 
-                    <Link to={<Signup/>}>sign Up</Link>
+                    <Link to={"/signup"}>sign Up</Link>
             </form >
         </div >
     )

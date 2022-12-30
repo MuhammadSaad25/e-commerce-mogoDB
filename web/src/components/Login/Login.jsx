@@ -10,12 +10,12 @@ import axios from "axios";
 
 
 
-let baseURI = "";
-if (window.location.href.split(":")[0] === "http") {
-    baseURI = `http://localhost:5001`;
-} else {
-    baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
-}
+// let baseURI = "";
+// if (window.location.href.split(":")[0] === "http") {
+//     baseURI = `http://localhost:5001`;
+// } else {
+//     baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
+// }
 
 
 
@@ -48,7 +48,7 @@ const Login = () => {
             console.log(values);
             try {
                 const res = await axios.post(
-                    `${baseURI}/api/v1/login`,
+                    `${state.baseURI}/login`,
                     {
                         email: values.email,
                         password: values.password,

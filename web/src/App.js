@@ -13,32 +13,48 @@ export default function App(props) {
 
   let { state, dispatch } = useContext(GlobalContext);
 
-  const logoutHandler = () => {
-    
+  // const [fullName, setFullName] = useState("");
+
+  const logoutHandler = async () => {
+    try {
+      let response = await axios.post(`${state.baseUrl}/logout`, {
+        withCredentials: true,
+      });
+      console.log("response: ", response);
+
+      dispatch({
+        type: "USER_LOGOUT",
+      });
+    } catch (error) {
+      console.log("axios error: ", error);
+    }
   };
 
   useEffect(() => {
-    let baseURI = "";
-    if (window.location.href.split(":")[0] === "http") {
-      baseURI = `http://localhost:5001`;
-    } else {
-      baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
-    }
-
     const getProfile = async () => {
-      let response = await axios.post(`${baseURI}/api/v1/products`, {
-        withCredentials: true,
-      });
-      dispatch({
-        type:'USER_LOGIN'
-      })
-    };
-    getProfile()
+      try {
+        let response = await axios.get(`${state.baseUrl}/products`, {
+          withCredentials: true,
+        });
 
-  },[]);
+        console.log("response: ", response);
+
+        dispatch({
+          type: "USER_LOGIN",
+        });
+      } catch (error) {
+        console.log("axios error: ", error);
+
+        dispatch({
+          type: "USER_LOGOUT",
+        });
+      }
+    };
+    getProfile();
+  }, []);
 
   return (
-    <div className="App"> 
+    <div className="App">
       {state.isLogin ? (
         <Routes>
           <Route path="/" element={<Home />} />

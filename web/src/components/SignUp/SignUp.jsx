@@ -1,23 +1,25 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./SignUp.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalContext } from '../../context/Context';
 import axios from "axios";
 
 
 
 
 
-let baseURI = "";
-if (window.location.href.split(":")[0] === "http") {
-  baseURI = `http://localhost:5001`;
-} else {
-  baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
-}
+// let baseURI = "";
+// if (window.location.href.split(":")[0] === "http") {
+//   baseURI = `http://localhost:5001`;
+// } else {
+//   baseURI = `https://e-commerce-mongodb-saad.cyclic.app`;
+// }
 
 
 
 function Signup() {
+    let { state, dispatch } = useContext(GlobalContext);
 
     const fmrk = useFormik({
         initialValues: {
@@ -55,7 +57,7 @@ function Signup() {
             console.log(values);
             try {
               const res = await axios.post(
-                `${baseURI}/api/v1/signup`,
+                `${state.baseURI}/signup`,
                 {
                     firstName: values.firstName,
                     lastName: values.lastName,

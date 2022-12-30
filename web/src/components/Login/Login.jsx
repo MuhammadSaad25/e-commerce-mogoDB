@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import Signup from "../SignUp/SignUp";
+// import Signup from "../SignUp/SignUp";
 
 import { useState, useContext } from "react";
 import { GlobalContext } from '../../context/Context';

@@ -4,6 +4,7 @@ import "./SignUp.css";
 import { useState, useContext } from "react";
 import { GlobalContext } from '../../context/Context';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 
@@ -56,28 +57,28 @@ function Signup() {
         onSubmit: async (values) => {
             console.log(values);
             try {
-              const res = await axios.post(
-                `${state.baseURI}/signup`,
-                {
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    email: values.email,
-                    password: values.password,
-                },
-                // { withCredentials: true }//we are not sending cookies
-              );
-              console.log("Signup successful",res);
-            //   toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
+                const res = await axios.post(
+                    `${state.baseURI}/signup`,
+                    {
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                        password: values.password,
+                    },
+                    // { withCredentials: true }//we are not sending cookies
+                );
+                console.log("Signup successful", res);
+                //   toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
             } catch (err) {
-              console.log(err);
-              console.log(err.response.data.message);
-            //   toast(`${err.response.data.message}`);
+                console.log(err);
+                console.log(err.response.data.message);
+                //   toast(`${err.response.data.message}`);
             }
             //do something like there you can call API or send data to firebase
             //if (errors) console.log("error is", errors);
             //console.log(errors);
-          }
-           
+        }
+
         ,
     });
 
@@ -169,7 +170,7 @@ function Signup() {
                         <i className="icon ion-md-lock"></i> SUBMIT
                     </button>
                 </div>
-
+                <Link to={"/login"}>log in </Link>
             </form >
         </div >
     );

@@ -8,7 +8,8 @@ import { useState, useContext } from "react";
 import { GlobalContext } from '../../context/Context';
 import axios from "axios";
 import Signup from "../SignUp/SignUp";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -24,6 +25,7 @@ import Signup from "../SignUp/SignUp";
 
 const Login = () => {
 
+    const [errMsg, setErrMsg] = useState("")
     let { state, dispatch } = useContext(GlobalContext);
 
 
@@ -48,10 +50,11 @@ const Login = () => {
         }),
 
         onSubmit: async (values) => {
+
             console.log(values);
             try {
-                const res = await axios.post(
-                    `/api/v1/login`,
+                const res = await axios.post(`${state.baseUrl}/login`,
+
                     {
                         email: values.email,
                         password: values.password,
@@ -59,36 +62,43 @@ const Login = () => {
                     // { withCredentials: true }//we are not sending cookies
                 );
                 dispatch({
-                    type:'USER_LOGIN',
-                    payload:null
+                    type: 'USER_LOGIN',
+                    payload: null
                 })
                 console.log("Login successful", res);
                 //   toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
             } catch (err) {
-                console.log(err);
-                console.log(err.response.data.message);
-                //   toast(`${err.response.data.message}`);
+
+                // console.log(err);
+                // console.log(err.response.data.message);
+                setErrMsg(err.response.data.message);
+                  toast(`${err.response.data.message}`);
             }
             //do something like there you can call API or send data to firebase
             //if (errors) console.log("error is", errors);
             //console.log(errors);
         },
-        //if (errors) console.log("error is", errors);
 
     });
 
+
+
     return (
         <div>
+            <ToastContainer />
             {/* {state.text} */}
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
-                    <h1>Login</h1>
+                    <h1>Login shehzadn</h1>
+                    <h1>{errMsg}</h1>
+{console.log(errMsg)}
                     {/* <button className="unit" type="button">
                         <i className="icon ion-md-bookmark"></i>
                     </button> */}
                 </div>
 
                 <div className="content1">
+
 
                     <label className=".label">
                         <input
@@ -131,8 +141,9 @@ const Login = () => {
                     </button>
                 </div>
 
-                    <Link to={"/signup"}>sign Up</Link>
+                <Link to={"/signup"}>sign Up</Link>
             </form >
+
         </div >
     )
 }

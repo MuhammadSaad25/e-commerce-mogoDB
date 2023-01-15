@@ -58,7 +58,7 @@ function Signup() {
             console.log(values);
             try {
                 const res = await axios.post(
-                    `/api/v1/signup`,
+                    `${state.baseUrl}/signup`,
                     {
                         firstName: values.firstName,
                         lastName: values.lastName,

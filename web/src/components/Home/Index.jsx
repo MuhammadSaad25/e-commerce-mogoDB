@@ -42,23 +42,23 @@ function Home() {
 
     const logoutHandler = async () => {
         try {
-          let response = await axios.post(`/api/v1/logout`, {
-            withCredentials: true,
-          });
-          console.log("response: ", response);
-    
-          dispatch({
-            type: "USER_LOGOUT",
-          });
+            let response = await axios.post(`${state.baseUrl}/logout`, {}, {
+                withCredentials: true,
+            });
+            console.log("response: ", response);
+
+            dispatch({
+                type: "USER_LOGOUT",
+            });
         } catch (error) {
-          console.log("axios error: ", error);
+            console.log("axios error: ", error);
         }
-      };
+    };
 
 
     const getAllProducts = async () => {
         try {
-            const response = await axios.get(`/api/v1/products`)
+            const response = await axios.get(`${state.baseUrl}/products`)
             console.log("response: ", response.data);
 
             setProducts(response.data.data.reverse())
@@ -70,7 +70,7 @@ function Home() {
 
     const deleteProduct = async (_id) => {
         try {
-            const response = await axios.delete(`/api/v1/product/${_id}`)
+            const response = await axios.delete(`${state.baseUrl}/product/${_id}`)
             console.log("response: ", response.data);
 
             setLoadProduct(!loadProduct)
@@ -137,7 +137,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.post(`/api/v1/product`, {
+            axios.post(`${state.baseUrl}/product`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,
@@ -181,7 +181,7 @@ function Home() {
         onSubmit: (values) => {
             console.log("values: ", values);
 
-            axios.put(`/api/v1/product/${editingProduct._id}`, {
+            axios.put(`${state.baseUrl}/product/${editingProduct._id}`, {
                 name: values.productName,
                 price: values.productPrice,
                 description: values.productDescription,

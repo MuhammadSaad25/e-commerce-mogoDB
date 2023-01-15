@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
 
-    const [errMsg, setErrMsg] = useState("")
+    // const [errMsg, setErrMsg] = useState("")
     let { state, dispatch } = useContext(GlobalContext);
 
 
@@ -71,7 +71,7 @@ const Login = () => {
 
                 // console.log(err);
                 // console.log(err.response.data.message);
-                setErrMsg(err.response.data.message);
+                // setErrMsg(err.response.data.message);
                   toast(`${err.response.data.message}`);
             }
             //do something like there you can call API or send data to firebase
@@ -90,8 +90,8 @@ const Login = () => {
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
                     <h1>Login shehzadn</h1>
-                    <h1>{errMsg}</h1>
-{console.log(errMsg)}
+                    {/* <h1>{errMsg}</h1> */}
+{/* {console.log(errMsg)} */}
                     {/* <button className="unit" type="button">
                         <i className="icon ion-md-bookmark"></i>
                     </button> */}

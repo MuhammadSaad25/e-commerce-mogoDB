@@ -45,7 +45,7 @@ const Login = () => {
             password: yup
                 .string("Enter your Password")
                 .required("Password is required")
-                .min(6, "Please enter more then 6 characters ")
+                .min(4, "Please enter more then 6 characters ")
                 .max(65, "Please enter within 65 characters "),
         }),
 
@@ -59,7 +59,7 @@ const Login = () => {
                         email: values.email,
                         password: values.password,
                     },
-                    // { withCredentials: true }//we are not sending cookies
+                    { withCredentials: true }//we are not sending cookies
                 );
                 dispatch({
                     type: 'USER_LOGIN',
@@ -89,7 +89,7 @@ const Login = () => {
             {/* {state.text} */}
             <form onSubmit={fmrk.handleSubmit}>
                 <div className="segment">
-                    <h1>Login shehzadn</h1>
+                    <h1>Login</h1>
                     {/* <h1>{errMsg}</h1> */}
 {/* {console.log(errMsg)} */}
                     {/* <button className="unit" type="button">

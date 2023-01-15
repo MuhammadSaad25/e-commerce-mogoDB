@@ -9,6 +9,7 @@ import axios from "axios";
 // import { useEffect, useState } from 'react';
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/Context";
+import { Link } from 'react-router-dom';
 
 const style = {
     position: "absolute",
@@ -58,7 +59,7 @@ function Home() {
 
     const getAllProducts = async () => {
         try {
-            const response = await axios.get(`${state.baseUrl}/products`)
+            const response = await axios.get(`${state.baseUrl}/products`,{ withCredentials: true })
             console.log("response: ", response.data);
 
             setProducts(response.data.data.reverse())
@@ -210,6 +211,10 @@ function Home() {
                     Add Product
                 </button>
                 <button onClick={logoutHandler}>Logout</button>
+                <button>
+                <Link to={"/updatepassword"}>UpdatePassword</Link>
+
+                </button>
             </div>
             <div className='modal'>
                 <Modal

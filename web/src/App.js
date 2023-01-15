@@ -7,6 +7,7 @@ import Home from "./components/Home/Index";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import axios from "axios";
+import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
 
 export default function App(props) {
   // const [state.isLogin, setstate.IsLogin] = useState(false);
@@ -20,7 +21,7 @@ export default function App(props) {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        let response = await axios.get(`${state.baseUrl}/products`, {
+        let response = await axios.get(`${state.baseUrl}/getprofile`, {
           withCredentials: true,
         });
 
@@ -45,6 +46,8 @@ export default function App(props) {
       {state.isLogin ? (
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/updatepassword" element={<UpdatePassword/>} />
+
 
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>

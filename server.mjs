@@ -19,7 +19,7 @@ app.use(
   })
 );
 
-app.use("api/v1", authApis);
+app.use("/api/v1", authApis);
 
 app.use("/api/v1", (req, res, next) => {
   console.log("req.cookies: ", req.cookies);
@@ -58,7 +58,7 @@ app.use("/api/v1", (req, res, next) => {
   });
 });
 
-app.use("api/v1", productApis);
+app.use("/api/v1", productApis);
 
 const __dirname = path.resolve();
 app.use("/", express.static(path.join(__dirname, "./web/build")));

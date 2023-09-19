@@ -7,9 +7,9 @@ let data = {
   darkTheme: true,
   user: {},
   isLogin: null,
-  baseUrl:(window.location.href.includes('localhost'))
-      ? `http://localhost:5001/api/v1`
-      : `https://e-commerce-mongodb-saad.cyclic.app/api/v1`,
+  baseUrl: window.location.href.includes("localhost")
+    ? `http://localhost:5001/api/v1`
+    : `https://e-commerce-mongo-db.vercel.app/api/v1`,
   // text:"ddddddddddddddd",
 };
 

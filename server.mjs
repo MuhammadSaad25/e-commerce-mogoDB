@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 const mongodbURI =
   process.env.mongodbURI ||
-  "mongodb+srv://saad:sdsdsd@cluster0.9bemtsg.mongodb.net/ecommerce?retryWrites=true&w=majority";
+  "mongodb+srv://saad:saad@cluster0.9bemtsg.mongodb.net/";
 
 // mongoose.connect(mongodbURI)
 
